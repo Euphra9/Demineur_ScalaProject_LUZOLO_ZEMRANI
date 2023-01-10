@@ -1,0 +1,10 @@
+Partie 1 :
+- Envoyer la liste des possibilité
+- regarder si le couple saisi est dans la liste des possibilité
+- Sinon, afficher un message à l'utilisateur de resaisir
+- Si oui, mettre à jour l'état du jeu -> mis à jour de la grille
+
+Partie 2 :
+- Calculer le nombre des voisis
+- recuperer les coordonnées des voisins
+
