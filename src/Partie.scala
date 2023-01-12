@@ -80,6 +80,10 @@ class Partie {
   def get_new_coords():Unit={
     var coords = scala.io.StdIn.readLine("Saisir les coordonnées de la case à cliquer? ")
     println("Vous avez choisi : "+coords)
+    val x= coords.split(",")
+    val y:(Int,Int)=(x(0).toInt,x(1).toInt)
+    println("Les coordonnées : "+y)
+
   }
   def play(choice:Int):Unit={
     println("Début de partie")
@@ -89,11 +93,14 @@ class Partie {
     val initialGrid=init_board_game(width,length,mine)._1
     val gridWithMines=init_board_game(width,length,mine)._2 // solution finale
     val mineSweeper = new MineSweeper()
-    mineSweeper.displayGrid(gridWithMines)
-    println("------")
-    mineSweeper.displayGrid(init_game(gridWithMines))
-    //mineSweeper.displayGrid(initialGrid)
-    //get_new_coords()
+
+    //
+    //mineSweeper.displayGrid(gridWithMines)
+    //println("------")
+    //mineSweeper.displayGrid(init_game(gridWithMines))
+    //
+    mineSweeper.displayGrid(initialGrid)
+    get_new_coords()
     //println(random_coords(initialGrid))
 
 
