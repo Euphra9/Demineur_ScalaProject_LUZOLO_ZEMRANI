@@ -4,6 +4,11 @@ import scala.::
 import scala.util.Random
 
 class Partie {
+  //variables globales
+  var width=0
+  var height = 0
+  var grid:Array[Array[String]]=Array()
+
   def get_nb_mine(choice: Int): Int = {
     var nb_mine = 0
     if (choice == 1) {
@@ -19,8 +24,6 @@ class Partie {
   }
 
   def get_dimension(choice: Int): (Int, Int) = {
-    var width = 0
-    var height = 0
     if (choice == 1) {
       width = 10
       height = 8
@@ -77,12 +80,39 @@ class Partie {
 
    list
  }
-  def get_new_coords():Unit={
+  def is_inside(x:Int,y:Int):Boolean={
+    var result=false
+    if((x<height)&&y<width){
+      result = true
+    }
+    result
+  }
+  def already_played(x:Int,y:Int):Boolean={
+    var result = false
+    println(x+"-"+y+"->"+grid(x)(y))
+    if (!grid(x)(y).contains(".")) {
+      result = true
+    }
+    result
+  }
+  def get_new_coords():(Int,Int)={
     var coords = scala.io.StdIn.readLine("Saisir les coordonnées de la case à cliquer? ")
-    println("Vous avez choisi : "+coords)
-    val x= coords.split(",")
-    val y:(Int,Int)=(x(0).toInt,x(1).toInt)
-    println("Les coordonnées : "+y)
+    var x= coords.split(",")
+    //on verifie si le couple est une combinaison possible de la matrice
+    while (!is_inside(x(0).toInt,x(1).toInt)) {
+      coords = scala.io.StdIn.readLine("Veillez choisir des coordonnées valide\nSaisir les coordonnées de la case à cliquer?")
+      x= coords.split(",")
+    }
+    //on verifie si le couple est une combinaison deja joué
+    while (already_played(x(0).toInt, x(1).toInt)) {
+      coords = scala.io.StdIn.readLine("Ces coordonnées ont deja été choisi, veillez en choisir d'aut\nSaisir les coordonnées de la case à cliquer?")
+      x = coords.split(",")
+    }
+
+      val new_coords: (Int, Int) = (x(0).toInt, x(1).toInt)
+      println("Les coordonnées choisies: " + new_coords)
+
+    new_coords
 
   }
   def play(choice:Int):Unit={
@@ -95,13 +125,18 @@ class Partie {
     val mineSweeper = new MineSweeper()
 
     //
-    //mineSweeper.displayGrid(gridWithMines)
     //println("------")
-    //mineSweeper.displayGrid(init_game(gridWithMines))
+    mineSweeper.displayGrid(init_game(gridWithMines))
     //
     mineSweeper.displayGrid(initialGrid)
-    get_new_coords()
+
     //println(random_coords(initialGrid))
+    grid=initialGrid
+    grid=mineSweeper.interact(grid,gridWithMines,get_new_coords())
+    while(!mineSweeper.is_fin_partie()){
+      mineSweeper.displayGrid(grid)
+      grid=mineSweeper.interact(grid,gridWithMines,get_new_coords())
+    }
 
 
   }
@@ -123,6 +158,7 @@ def init_game(grid:Array[Array[String]]):Array[Array[String]]={
   finalGrid
 
 }
+  //---------------------
   def get_neighbors(coords:(Int,Int),grid:Array[Array[String]]): List[(Int,Int)]={
     var list_of_neighbors :List[(Int,Int)]=List()
     val i=coords._1
