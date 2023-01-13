@@ -1,5 +1,7 @@
 class Neighbor extends Game{
   // DOIT etre une méthode recursive
+
+  //Cette fonction permet de récupérer la liste des voisins
   def get_neighbors(coords: (Int, Int), grid: Array[Array[String]]): List[(Int, Int)] = {
 
     var list_of_neighbors: List[(Int, Int)] = List()
@@ -81,7 +83,6 @@ class Neighbor extends Game{
         list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
       }
     }
-
     else {
       //grid(i)(j)="8"
       list_of_neighbors = list_of_neighbors :+ voisin_haut
@@ -92,14 +93,12 @@ class Neighbor extends Game{
       list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
       list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
       list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
-
     }
-
-
     list_of_neighbors
   }
 
 
+  //vérifie si la cellule actuelle se trouve au bord
   def on_the_verge(coords: (Int, Int), size: (Int, Int)): Boolean = {
     var result = false
     if (!on_the_corner(coords, size)) {
@@ -109,11 +108,10 @@ class Neighbor extends Game{
         result = true
       }
     }
-
-
     result
   }
 
+  ////vérifie si la cellule actuelle se trouve au coin
   def on_the_corner(coords: (Int, Int), size: (Int, Int)): Boolean = {
     var result = false
     if (coords._1 == 0) {

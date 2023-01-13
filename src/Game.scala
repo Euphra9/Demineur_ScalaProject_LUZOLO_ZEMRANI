@@ -8,10 +8,9 @@ class Game {
   var grid:Array[Array[String]]=Array()
 
 
-<<<<<<< HEAD
-=======
-// fonction qui renvoit les dimmensions du plateau de jeu en fonction du niveau choisi par l'utilisateur
->>>>>>> e51a41168203b63dd18bcff0aace9c05b734ab2b
+
+// Fonction qui renvoit les dimmensions du plateau de jeu en fonction du niveau choisi par l'utilisateur
+
   def get_dimension(choice: Int): (Int, Int) = {
     choice match{
       case 1 => width = 10
@@ -84,12 +83,12 @@ class Game {
           result = true
         }
       }
-
-
     }
-
     result
   }
+
+  //Cette fonction permet de récupérer ce qu'un utilisateur saisit. Lorsque ce dernier saisie au clavier une valeur on la transforme en un tuple
+  // (la ligne, la colonne)
   def get_new_coords():(Int,Int)={
     var coords = scala.io.StdIn.readLine("Saisir les coordonnées de la case à cliquer? ")
 
@@ -109,7 +108,6 @@ class Game {
       coords = scala.io.StdIn.readLine("Ces coordonnées ont deja été choisi, vueillez en choisir d'autre\nSaisir les coordonnées de la case à cliquer?")
       x = coords.split(",")
     }
-
     val new_coords: (Int, Int) = (x(0).toInt, x(1).toInt)
     println("Les coordonnées choisies: " + new_coords)
 
@@ -126,12 +124,8 @@ class Game {
     val gridWithMines=init_board_game(width,length,nb_mine)._2 // solution finale
     reveledCell=(width*height)-nb_mine
     val mineSweeper = new MineSweeper(reveledCell)
-
     mineSweeper.displayGrid(init_game(gridWithMines))
-    //
     mineSweeper.displayGrid(initialGrid)
-
-    //println(random_coords(initialGrid))
     grid=initialGrid
     grid=mineSweeper.interact(grid,gridWithMines,get_new_coords())
     while(!mineSweeper.is_fin_partie()){
@@ -139,11 +133,9 @@ class Game {
       grid=mineSweeper.interact(grid,gridWithMines,get_new_coords())
     }
     mineSweeper.displayGrid(grid)
-
-
-
   }
 
+  //Cette fonction permet d'initialiser la grille de solution en spécifiant le nombre de voisins qui sont des mines
   def init_game(grid:Array[Array[String]]):Array[Array[String]]={
     val cell= new Neighbor()
     val finalGrid=grid
@@ -160,6 +152,7 @@ class Game {
 
   }
 
+  //Cette fonction permet d'incrémenter la valeur des voisins aux coordonnées (i, j) si elle est différente de -1.
   def incr_tab(neighbors: List[(Int,Int)],grid:Array[Array[String]]):Int={
     var nb_mine=0
     for (ngb <- neighbors) {
@@ -167,7 +160,6 @@ class Game {
         nb_mine += 1
       }
     }
-
     nb_mine
   }
 

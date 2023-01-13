@@ -4,6 +4,7 @@ class MineSweeper(var reveledCell: Int) {
   var element=""
   var tmpList:List[(Int,Int)]=List() // utilisée pour stocker la liste des voisins d'une cellule
 
+  //Cette fonction sert à afficher le plateau
   def displayGrid(grid: Array[Array[String]]): Unit = {
     print("   ")
     for (i <- 0 until grid(0).length) {
@@ -24,6 +25,7 @@ class MineSweeper(var reveledCell: Int) {
     }
   }
 
+  //Cette fonction sert à mettre à jour le jeu.
   def interact(grid: Array[Array[String]],Resultgrid: Array[Array[String]], couple: (Int,Int)):Array[Array[String]]={
     var tmpGrid=grid
     element=Resultgrid(couple._1)(couple._2)
@@ -75,6 +77,7 @@ class MineSweeper(var reveledCell: Int) {
 
   }
 
+  //Cette fonction permet d'informer l'utilisateur de sa perte ou de son gain
   def is_fin_partie():Boolean={
     var result=false
     if(element=="-1"){

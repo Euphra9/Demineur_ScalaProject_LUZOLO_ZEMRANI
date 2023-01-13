@@ -2,6 +2,7 @@ import scala.util.Random
 
 case class Mine() extends Game{
 
+  //Cette fonction permet de renvoyer le nombre de mines qu'il y aura dans le plateau
   def get_nb_mine(choice: Int): Int = {
     choice match {
       case 1 => nb_mine = 9
@@ -11,6 +12,7 @@ case class Mine() extends Game{
     nb_mine
   }
 
+  //Cette fonction sert à générer dans une cellule une mine
   def random_mine(width: Int, height: Int, gridWithSolution: Array[Array[String]]): Array[Array[String]] = {
     val x = Random.nextInt(width)
     val y = Random.nextInt(height)
@@ -35,5 +37,4 @@ case class Mine() extends Game{
     }
     grid
   }
-
 }
