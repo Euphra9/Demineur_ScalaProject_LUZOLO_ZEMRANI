@@ -30,7 +30,7 @@ case class Mine() extends Game{
             grid(i)(j) = "*"
           }
           else {
-            grid(i)(j) = "*"
+            grid(i)(j) = " *"
           }
         }
       }
