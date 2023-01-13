@@ -12,19 +12,14 @@ class Game {
   var grid:Array[Array[String]]=Array()
 
 
-
   def get_dimension(choice: Int): (Int, Int) = {
-    if (choice == 1) {
-      width = 10
-      height = 8
-    }
-    else if (choice == 2) {
-      width = 18
-      height = 14
-    }
-    else if (choice == 3) {
-      width = 24
-      height = 20
+    choice match{
+      case 1 => width = 10
+                height = 8
+      case 2 => width = 18
+                height = 14
+      case 3 => width = 24
+                height = 20
     }
     (width, height);
   }
@@ -93,12 +88,12 @@ class Game {
     var x= coords.split(",")
     //on verifie si le couple est une combinaison possible de la matrice
     while (!is_inside(x(0).toInt,x(1).toInt)) {
-      coords = scala.io.StdIn.readLine("Veillez choisir des coordonnées valide\nSaisir les coordonnées de la case à cliquer?")
+      coords = scala.io.StdIn.readLine("Vueillez choisir des coordonnées valide\nSaisir les coordonnées de la case à cliquer?")
       x= coords.split(",")
     }
     //on verifie si le couple est une combinaison deja joué
     while (already_played(x(0).toInt, x(1).toInt)) {
-      coords = scala.io.StdIn.readLine("Ces coordonnées ont deja été choisi, veillez en choisir d'aut\nSaisir les coordonnées de la case à cliquer?")
+      coords = scala.io.StdIn.readLine("Ces coordonnées ont deja été choisi, vueillez en choisir d'autre\nSaisir les coordonnées de la case à cliquer?")
       x = coords.split(",")
     }
 

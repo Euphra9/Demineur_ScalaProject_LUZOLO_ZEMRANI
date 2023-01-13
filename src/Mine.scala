@@ -3,16 +3,12 @@ import scala.util.Random
 case class Mine() extends Game{
 
   def get_nb_mine(choice: Int): Int = {
-    if (choice == 1) {
-      nb_mine = 9
+    choice match {
+      case 1 => nb_mine = 9
+      case 2 => nb_mine = 38
+      case 3 => nb_mine = 99
     }
-    else if (choice == 2) {
-      nb_mine = 38
-    }
-    else if (choice == 3) {
-      nb_mine = 99
-    }
-    nb_mine;
+    nb_mine
   }
 
   def random_mine(width: Int, height: Int, gridWithSolution: Array[Array[String]]): Array[Array[String]] = {
@@ -32,7 +28,7 @@ case class Mine() extends Game{
             grid(i)(j) = "*"
           }
           else {
-            grid(i)(j) = " *"
+            grid(i)(j) = "*"
           }
         }
       }
