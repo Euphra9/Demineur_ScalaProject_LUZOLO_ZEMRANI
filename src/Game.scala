@@ -66,7 +66,6 @@ class Game {
   }
   def already_played(x:Int,y:Int):Boolean={
     var result = false
-    println(x+"-"+y+"->"+grid(x)(y))
     if (!grid(x)(y).contains(".")) {
       result = true
     }
