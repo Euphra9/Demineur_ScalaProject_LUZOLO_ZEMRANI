@@ -1,17 +1,17 @@
-import com.sun.prism.image.Coords
-
-import scala.::
-import scala.util.Random
 
 class Game {
   //variables globales
   var width=0
   var height = 0
-  var reveledCell=0;
+  var reveledCell=0
   var nb_mine=0
   var grid:Array[Array[String]]=Array()
 
 
+<<<<<<< HEAD
+=======
+// fonction qui renvoit les dimmensions du plateau de jeu en fonction du niveau choisi par l'utilisateur
+>>>>>>> e51a41168203b63dd18bcff0aace9c05b734ab2b
   def get_dimension(choice: Int): (Int, Int) = {
     choice match{
       case 1 => width = 10
@@ -21,15 +21,15 @@ class Game {
       case 3 => width = 24
                 height = 20
     }
-    (width, height);
+    (width, height)
   }
 
 
-  // Génère une grille de mines aléatoires de la taille donnée
+  // Fonction qui fabrique à la fois le plateau de jeu visible par l'utilisateur
+  // ainsi que la matrice contenant la solution
   def init_board_game(width: Int, height: Int, mines: Int): (Array[Array[String]], Array[Array[String]]) = {
     val grid = Array.fill(height, width)(".")
     var gridWithSolution = Array.fill(height, width)("0")
-
     for (i <- 0 until width) {
       for (j <- 0 until height) {
         val x = i
@@ -44,14 +44,16 @@ class Game {
 
       }
     }
-
-    for (i <- 0 until mines) {
+    for (_ <- 0 until mines) {
       gridWithSolution = Mine().random_mine(width,height,gridWithSolution)
 
     }
     (grid, gridWithSolution)
   }
 
+  //fonction qui verifie que la saisie utilisateur fait parti de la matrice du plateai
+  //par exemple si le plateau fait 3x4 et que l'utilisateur saisi 5,2,
+  // alors un message d'erreur sera affiché afin de saisir des valeurs correctes
   def is_inside(x:Int,y:Int):Boolean={
     var result=false
     if((x<height)&&y<width){
@@ -59,6 +61,9 @@ class Game {
     }
     result
   }
+  // fonction qui verifie que la saisie utilisateur ne correspond pas à une case deja decouverte
+  // par exemple si la cellule (1,2) affiche 2,
+  // si l'utilisateur entre 1,2 alors un message d'erreur va s'afficher pour lui dire d'entrer une nouvelle valeur
   def already_played(x:Int,y:Int):Boolean={
     var result = false
     if (!grid(x)(y).contains(".")) {
@@ -66,12 +71,20 @@ class Game {
     }
     result
   }
+
+  // méthode qui permet de verifier que la saisie utilisateur est correct
+  // seule saisie correcte possible : longeur,largeur
+  // exemple : 1,2
   def is_format_correct(x:String):Boolean={
     var result=false
-    if(x.length==3){
-      if (x(1) == ',') {
-        result = true
+    if(x.contains(",")){
+      var tmp=x.split(",")
+      if(tmp.length==2){
+        if(tmp(0).forall(_.isDigit) && tmp(1).forall(_.isDigit)) {
+          result = true
+        }
       }
+
 
     }
 
@@ -103,9 +116,10 @@ class Game {
     new_coords
 
   }
+  //fonction qui permet de commencer une partie
   def play(choice:Int):Unit={
     println("Début de partie")
-    nb_mine= new Mine().get_nb_mine(choice)
+    nb_mine= Mine().get_nb_mine(choice)
     val width=get_dimension(choice)._1
     val length=get_dimension(choice)._2
     val initialGrid=init_board_game(width,length,nb_mine)._1
@@ -113,8 +127,7 @@ class Game {
     reveledCell=(width*height)-nb_mine
     val mineSweeper = new MineSweeper(reveledCell)
 
-    val cell= new Neighbor()
-    mineSweeper.displayGrid(init_game(cell,gridWithMines))
+    mineSweeper.displayGrid(init_game(gridWithMines))
     //
     mineSweeper.displayGrid(initialGrid)
 
@@ -131,10 +144,8 @@ class Game {
 
   }
 
-  //gestion des voisins
-
-  def init_game(cell:Neighbor, grid:Array[Array[String]]):Array[Array[String]]={
-    var cell= new Neighbor()
+  def init_game(grid:Array[Array[String]]):Array[Array[String]]={
+    val cell= new Neighbor()
     val finalGrid=grid
     val height=finalGrid.length
     val width=finalGrid(0).length
