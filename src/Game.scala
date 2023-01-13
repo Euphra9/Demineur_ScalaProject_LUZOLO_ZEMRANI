@@ -71,8 +71,25 @@ class Game {
     }
     result
   }
+  def is_format_correct(x:String):Boolean={
+    var result=false
+    if(x.length==3){
+      if (x(1) == ',') {
+        result = true
+      }
+
+    }
+
+    result
+  }
   def get_new_coords():(Int,Int)={
     var coords = scala.io.StdIn.readLine("Saisir les coordonnées de la case à cliquer? ")
+
+    while (!is_format_correct(coords)) {
+      coords = scala.io.StdIn.readLine("Veillez choisir un format correct ligne,colonne \nExemple : 1,2" +
+        "\nSaisir les coordonnées de la case à cliquer?")
+    }
+
     var x= coords.split(",")
     //on verifie si le couple est une combinaison possible de la matrice
     while (!is_inside(x(0).toInt,x(1).toInt)) {
