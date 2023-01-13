@@ -20,7 +20,6 @@ class Neighbor extends Game{
     //----
     // j'ai 3 voisins
     if (on_the_corner((i, j), (grid.length, grid(0).length))) {
-      //grid(i)(j)="3"
 
       if (i == 0) {
         list_of_neighbors = list_of_neighbors :+ voisin_bas
@@ -44,14 +43,11 @@ class Neighbor extends Game{
           list_of_neighbors = list_of_neighbors :+ voisin_gauche
           list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
         }
-
       }
-
     }
     // j'ai 5 voisins
 
     else if (on_the_verge((i, j), (grid.length, grid(1).length))) {
-      //grid(i)(j)="5"
       if (i == 0) {
         list_of_neighbors = list_of_neighbors :+ voisin_gauche
         list_of_neighbors = list_of_neighbors :+ voisin_droite
@@ -84,7 +80,6 @@ class Neighbor extends Game{
       }
     }
     else {
-      //grid(i)(j)="8"
       list_of_neighbors = list_of_neighbors :+ voisin_haut
       list_of_neighbors = list_of_neighbors :+ voisin_gauche
       list_of_neighbors = list_of_neighbors :+ voisin_droite

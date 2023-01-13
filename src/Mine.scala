@@ -14,8 +14,12 @@ case class Mine() extends Game{
 
   //Cette fonction sert à générer dans une cellule une mine
   def random_mine(width: Int, height: Int, gridWithSolution: Array[Array[String]]): Array[Array[String]] = {
-    val x = Random.nextInt(width)
-    val y = Random.nextInt(height)
+    var x = Random.nextInt(width)
+    var y = Random.nextInt(height)
+    while (gridWithSolution(y)(x)=="-1"){
+       x = Random.nextInt(width)
+       y = Random.nextInt(height)
+    }
     gridWithSolution(y)(x) = "-1"
     gridWithSolution
 
