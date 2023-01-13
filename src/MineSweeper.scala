@@ -38,11 +38,12 @@ class MineSweeper(var reveledCell: Int) {
     }
     else {
       reveledCell-=1
-        if (couple._1.toString.length == 1) {
-          tmpGrid(couple._1)(couple._2)=" "+Resultgrid(couple._1)(couple._2)
+        println("ITER : "+couple._2.toString)
+        if (couple._2.toString.length == 1) {
+          tmpGrid(couple._1)(couple._2)=Resultgrid(couple._1)(couple._2)
         }
         else {
-          tmpGrid(couple._1)(couple._2)=Resultgrid(couple._1)(couple._2)
+          tmpGrid(couple._1)(couple._2)=" "+Resultgrid(couple._1)(couple._2)
         }
     }
     println("Case restante à trouver : "+reveledCell)
