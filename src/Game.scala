@@ -110,11 +110,11 @@ class Game {
   }
   def play(choice:Int):Unit={
     println("Début de partie")
-    val mine= new Mine().get_nb_mine(choice)
+    nb_mine= new Mine().get_nb_mine(choice)
     val width=get_dimension(choice)._1
     val length=get_dimension(choice)._2
-    val initialGrid=init_board_game(width,length,mine)._1
-    val gridWithMines=init_board_game(width,length,mine)._2 // solution finale
+    val initialGrid=init_board_game(width,length,nb_mine)._1
+    val gridWithMines=init_board_game(width,length,nb_mine)._2 // solution finale
     reveledCell=(width*height)-nb_mine
     val mineSweeper = new MineSweeper(reveledCell)
 
