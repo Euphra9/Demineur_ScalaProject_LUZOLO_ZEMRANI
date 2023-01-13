@@ -123,6 +123,8 @@ class Game {
     val initialGrid=init_board_game(width,length,nb_mine)._1
     val gridWithMines=init_board_game(width,length,nb_mine)._2 // solution finale
     reveledCell=(width*height)-nb_mine
+    println("ITER : "+reveledCell)
+
     val mineSweeper = new MineSweeper(reveledCell)
     mineSweeper.displayGrid(init_game(gridWithMines))
     mineSweeper.displayGrid(initialGrid)
