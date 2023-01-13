@@ -1,6 +1,6 @@
 
 class MineSweeper(var reveledCell: Int) {
-  var mine=Mine(reveledCell)
+  var mine=Mine()
   var element=""
   def displayGrid(grid: Array[Array[String]]): Unit = {
     print("   ")

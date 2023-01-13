@@ -11,18 +11,7 @@ class Game {
   var nb_mine=0
   var grid:Array[Array[String]]=Array()
 
-  def get_nb_mine(choice: Int): Int = {
-    if (choice == 1) {
-      nb_mine = 9
-    }
-    else if (choice == 2) {
-      nb_mine = 38
-    }
-    else if (choice == 3) {
-      nb_mine = 99
-    }
-    nb_mine;
-  }
+
 
   def get_dimension(choice: Int): (Int, Int) = {
     if (choice == 1) {
@@ -40,13 +29,7 @@ class Game {
     (width, height);
   }
 
-  def random_mine(width: Int, height: Int,gridWithSolution:Array[Array[String]]):Array[Array[String]]={
-    val x = Random.nextInt (width)
-    val y = Random.nextInt (height)
-    gridWithSolution(y)(x) = "-1"
-    gridWithSolution
 
-  }
   // Génère une grille de mines aléatoires de la taille donnée
   def init_board_game(width: Int, height: Int, mines: Int): (Array[Array[String]], Array[Array[String]]) = {
     val grid = Array.fill(height, width)(".")
@@ -68,19 +51,12 @@ class Game {
     }
 
     for (i <- 0 until mines) {
-      gridWithSolution = random_mine(width,height,gridWithSolution)
+      gridWithSolution = Mine().random_mine(width,height,gridWithSolution)
 
     }
     (grid, gridWithSolution)
   }
 
-  def random_coords(grid:Array[Array[String]]):List[(Int,Int)]={
-    val coords1=(1,1)
-    val coords2=(1,1)
-    val list=List(coords1,coords2)
-
-    list
-  }
   def is_inside(x:Int,y:Int):Boolean={
     var result=false
     if((x<height)&&y<width){
@@ -118,7 +94,7 @@ class Game {
   }
   def play(choice:Int):Unit={
     println("Début de partie")
-    val mine=get_nb_mine(choice)
+    val mine= new Mine().get_nb_mine(choice)
     val width=get_dimension(choice)._1
     val length=get_dimension(choice)._2
     val initialGrid=init_board_game(width,length,mine)._1
@@ -126,9 +102,8 @@ class Game {
     reveledCell=(width*height)-nb_mine
     val mineSweeper = new MineSweeper(reveledCell)
 
-    //
-    //println("------")
-    mineSweeper.displayGrid(init_game(gridWithMines))
+    val cell= new Neighbor()
+    mineSweeper.displayGrid(init_game(cell,gridWithMines))
     //
     mineSweeper.displayGrid(initialGrid)
 
@@ -147,147 +122,20 @@ class Game {
 
   //gestion des voisins
 
-  def init_game(grid:Array[Array[String]]):Array[Array[String]]={
+  def init_game(cell:Neighbor, grid:Array[Array[String]]):Array[Array[String]]={
+    var cell= new Neighbor()
     val finalGrid=grid
     val height=finalGrid.length
     val width=finalGrid(0).length
     for (i <- 0 until height) {
       for (j <- 0 until width) {
-        // println("A l'emplacement (" + i + "," + j + ") ->" + finalGrid(i)(j) + " : " + get_neighbors((i, j), finalGrid))
         if(!finalGrid(i)(j).equals("-1")) {
-          finalGrid(i)(j)=incr_tab(get_neighbors((i, j), finalGrid),finalGrid).toString
+          finalGrid(i)(j)=incr_tab(cell.get_neighbors((i, j), finalGrid),finalGrid).toString
         }
       }
     }
     finalGrid
 
-  }
-  //---------------------
-  def get_neighbors(coords:(Int,Int),grid:Array[Array[String]]): List[(Int,Int)]={
-    var list_of_neighbors :List[(Int,Int)]=List()
-    val i=coords._1
-    val j= coords._2
-    // couple des voisins
-    val voisin_gauche=(i, j - 1)
-    val voisin_droite=(i, j + 1)
-    val voisin_haut=(i-1, j)
-    val voisin_bas=(i+1, j)
-    val voisin_diagonal_haut_gauche=(i - 1, j - 1)
-    val voisin_diagonal_haut_droite=(i - 1, j + 1)
-    val voisin_diagonal_bas_gauche=(i+1, j-1)
-    val voisin_diagonal_bas_droite=(i+1, j + 1)
-
-    //----
-    // j'ai 3 voisins
-    if (on_the_corner((i, j), (grid.length, grid(0).length))) {
-      //grid(i)(j)="3"
-
-      if (i==0){
-        list_of_neighbors = list_of_neighbors :+ voisin_bas
-        if(j==0) {
-          list_of_neighbors = list_of_neighbors :+ voisin_droite
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
-        }
-        else {
-          list_of_neighbors = list_of_neighbors :+ voisin_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
-        }
-      }
-      else{
-        list_of_neighbors = list_of_neighbors :+ voisin_haut
-
-        if (j == 0) {
-          list_of_neighbors = list_of_neighbors :+ voisin_droite
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
-        }
-        else {
-          list_of_neighbors = list_of_neighbors :+ voisin_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
-        }
-
-      }
-
-    }
-    // j'ai 5 voisins
-    else if (on_the_verge((i, j),(grid.length, grid(1).length))) {
-      //grid(i)(j)="5"
-      if(i==0) {
-        list_of_neighbors = list_of_neighbors :+ voisin_gauche
-        list_of_neighbors = list_of_neighbors :+ voisin_droite
-        list_of_neighbors = list_of_neighbors :+ voisin_bas
-        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
-        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
-      }
-
-      else if(j==0){
-        list_of_neighbors = list_of_neighbors :+ voisin_haut
-        list_of_neighbors = list_of_neighbors :+ voisin_droite
-        list_of_neighbors = list_of_neighbors :+ voisin_bas
-        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
-        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
-      }
-      else if (i == grid.length-1) {
-        list_of_neighbors = list_of_neighbors :+ voisin_gauche
-        list_of_neighbors = list_of_neighbors :+ voisin_droite
-        list_of_neighbors = list_of_neighbors :+ voisin_haut
-        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
-        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
-
-      }
-      else if(j==grid(0).length-1){
-        list_of_neighbors = list_of_neighbors :+ voisin_haut
-        list_of_neighbors = list_of_neighbors :+ voisin_gauche
-        list_of_neighbors = list_of_neighbors :+ voisin_bas
-        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
-        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
-      }
-    }
-
-    else {
-      //grid(i)(j)="8"
-      list_of_neighbors = list_of_neighbors :+ voisin_haut
-      list_of_neighbors = list_of_neighbors :+ voisin_gauche
-      list_of_neighbors = list_of_neighbors :+ voisin_droite
-      list_of_neighbors = list_of_neighbors :+ voisin_bas
-      list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
-      list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
-      list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
-      list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
-
-    }
-
-
-    list_of_neighbors
-  }
-  def on_the_corner(coords:(Int,Int), size:(Int,Int)):Boolean={
-    var result=false
-    if(coords._1 == 0){
-      if (coords._2 == 0 || coords._2==size._2-1) {
-        result = true
-      }
-    }
-    else if (coords._1 == size._1 - 1) {
-      if (coords._2 == 0 || coords._2 == size._2 - 1) {
-        result = true
-      }
-    }
-    result
-  }
-
-  def on_the_verge(coords: (Int, Int), size: (Int, Int)): Boolean = {
-    var result = false
-    if(!on_the_corner(coords,size))
-    {
-      if((coords._1==0)
-        || (coords._2==0)
-        || (coords._1==size._1-1) || (coords._2 == size._2-1))
-      {
-        result=true
-      }
-    }
-
-
-    result
   }
 
   def incr_tab(neighbors: List[(Int,Int)],grid:Array[Array[String]]):Int={
