@@ -3,7 +3,7 @@ import com.sun.prism.image.Coords
 import scala.::
 import scala.util.Random
 
-class Partie {
+class Game {
   //variables globales
   var width=0
   var height = 0
@@ -14,7 +14,6 @@ class Partie {
   def get_nb_mine(choice: Int): Int = {
     if (choice == 1) {
       nb_mine = 9
-
     }
     else if (choice == 2) {
       nb_mine = 38
