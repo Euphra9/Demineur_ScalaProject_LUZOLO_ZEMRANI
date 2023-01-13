@@ -7,12 +7,14 @@ class Partie {
   //variables globales
   var width=0
   var height = 0
+  var reveledCell=0;
+  var nb_mine=0
   var grid:Array[Array[String]]=Array()
 
   def get_nb_mine(choice: Int): Int = {
-    var nb_mine = 0
     if (choice == 1) {
       nb_mine = 9
+
     }
     else if (choice == 2) {
       nb_mine = 38
@@ -122,7 +124,8 @@ class Partie {
     val length=get_dimension(choice)._2
     val initialGrid=init_board_game(width,length,mine)._1
     val gridWithMines=init_board_game(width,length,mine)._2 // solution finale
-    val mineSweeper = new MineSweeper()
+    reveledCell=(width*height)-nb_mine
+    val mineSweeper = new MineSweeper(reveledCell)
 
     //
     //println("------")
@@ -137,6 +140,8 @@ class Partie {
       mineSweeper.displayGrid(grid)
       grid=mineSweeper.interact(grid,gridWithMines,get_new_coords())
     }
+    mineSweeper.displayGrid(grid)
+
 
 
   }

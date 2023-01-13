@@ -1,6 +1,5 @@
-import scala.collection.convert.ImplicitConversions.`mutableSeq AsJavaList`
 
-class MineSweeper {
+class MineSweeper(var reveledCell: Int) {
   var element=""
   var tmpList:List[(Int,Int)]=List()
   def displayGrid(grid: Array[Array[String]]): Unit = {
@@ -25,20 +24,21 @@ class MineSweeper {
   }
 
   def interact(grid: Array[Array[String]],Resultgrid: Array[Array[String]], couple: (Int,Int)):Array[Array[String]]={
-    print("Etat de la partie\n")
     var tmpGrid=grid
     element=Resultgrid(couple._1)(couple._2)
-    if(element=="-1"){
-      tmpGrid=show_all_mine(tmpGrid,Resultgrid)
-      displayGrid(tmpGrid)
-    }else if(element=="0"){
+      if(element=="-1") {
+      println("Fin de la partie")
+        tmpGrid = show_all_mine(tmpGrid, Resultgrid)
+      }
+    else if(element=="0"){
       tmpGrid=is_nextTo_mine((couple._1,couple._2),tmpGrid,Resultgrid)
-
+      reveledCell+=1
     }
     else {
+      reveledCell-=1
       tmpGrid(couple._1)(couple._2)=Resultgrid(couple._1)(couple._2)
     }
-    //displayGrid(tmpGrid)
+    println("Case restante à trouver : "+reveledCell)
     tmpGrid
   }
   def show_all_mine(grid: Array[Array[String]],Resultgrid: Array[Array[String]]):Array[Array[String]]={
@@ -71,6 +71,8 @@ class MineSweeper {
 
       }
     tmpGrid(couple._1)(couple._2)=Resultgrid(couple._1)(couple._2)
+    reveledCell-=1
+
 
     tmpGrid
 
@@ -80,6 +82,10 @@ class MineSweeper {
     if(element=="-1"){
       println("Vous avez perdu ! ")
       result=true
+    }
+    else if(reveledCell==0){
+      println("Vous avez gagné ! ")
+      result = true
     }
     result
   }
