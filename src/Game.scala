@@ -68,19 +68,19 @@ class Game {
     }
 
     for (i <- 0 until mines) {
-        gridWithSolution = random_mine(width,height,gridWithSolution)
+      gridWithSolution = random_mine(width,height,gridWithSolution)
 
     }
     (grid, gridWithSolution)
   }
 
- def random_coords(grid:Array[Array[String]]):List[(Int,Int)]={
-   val coords1=(1,1)
-   val coords2=(1,1)
-   val list=List(coords1,coords2)
+  def random_coords(grid:Array[Array[String]]):List[(Int,Int)]={
+    val coords1=(1,1)
+    val coords2=(1,1)
+    val list=List(coords1,coords2)
 
-   list
- }
+    list
+  }
   def is_inside(x:Int,y:Int):Boolean={
     var result=false
     if((x<height)&&y<width){
@@ -110,8 +110,8 @@ class Game {
       x = coords.split(",")
     }
 
-      val new_coords: (Int, Int) = (x(0).toInt, x(1).toInt)
-      println("Les coordonnées choisies: " + new_coords)
+    val new_coords: (Int, Int) = (x(0).toInt, x(1).toInt)
+    println("Les coordonnées choisies: " + new_coords)
 
     new_coords
 
@@ -147,21 +147,21 @@ class Game {
 
   //gestion des voisins
 
-def init_game(grid:Array[Array[String]]):Array[Array[String]]={
-  val finalGrid=grid
-  val height=finalGrid.length
-  val width=finalGrid(0).length
-  for (i <- 0 until height) {
-    for (j <- 0 until width) {
-       // println("A l'emplacement (" + i + "," + j + ") ->" + finalGrid(i)(j) + " : " + get_neighbors((i, j), finalGrid))
-     if(!finalGrid(i)(j).equals("-1")) {
-      finalGrid(i)(j)=incr_tab(get_neighbors((i, j), finalGrid),finalGrid).toString
-     }
+  def init_game(grid:Array[Array[String]]):Array[Array[String]]={
+    val finalGrid=grid
+    val height=finalGrid.length
+    val width=finalGrid(0).length
+    for (i <- 0 until height) {
+      for (j <- 0 until width) {
+        // println("A l'emplacement (" + i + "," + j + ") ->" + finalGrid(i)(j) + " : " + get_neighbors((i, j), finalGrid))
+        if(!finalGrid(i)(j).equals("-1")) {
+          finalGrid(i)(j)=incr_tab(get_neighbors((i, j), finalGrid),finalGrid).toString
+        }
+      }
     }
-  }
-  finalGrid
+    finalGrid
 
-}
+  }
   //---------------------
   def get_neighbors(coords:(Int,Int),grid:Array[Array[String]]): List[(Int,Int)]={
     var list_of_neighbors :List[(Int,Int)]=List()
@@ -211,48 +211,48 @@ def init_game(grid:Array[Array[String]]):Array[Array[String]]={
     // j'ai 5 voisins
     else if (on_the_verge((i, j),(grid.length, grid(1).length))) {
       //grid(i)(j)="5"
-        if(i==0) {
-          list_of_neighbors = list_of_neighbors :+ voisin_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_droite
-          list_of_neighbors = list_of_neighbors :+ voisin_bas
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
-        }
-
-        else if(j==0){
-          list_of_neighbors = list_of_neighbors :+ voisin_haut
-          list_of_neighbors = list_of_neighbors :+ voisin_droite
-          list_of_neighbors = list_of_neighbors :+ voisin_bas
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
-        }
-        else if (i == grid.length-1) {
-          list_of_neighbors = list_of_neighbors :+ voisin_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_droite
-          list_of_neighbors = list_of_neighbors :+ voisin_haut
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
-
-        }
-        else if(j==grid(0).length-1){
-          list_of_neighbors = list_of_neighbors :+ voisin_haut
-          list_of_neighbors = list_of_neighbors :+ voisin_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_bas
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
-        }
+      if(i==0) {
+        list_of_neighbors = list_of_neighbors :+ voisin_gauche
+        list_of_neighbors = list_of_neighbors :+ voisin_droite
+        list_of_neighbors = list_of_neighbors :+ voisin_bas
+        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
+        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
       }
+
+      else if(j==0){
+        list_of_neighbors = list_of_neighbors :+ voisin_haut
+        list_of_neighbors = list_of_neighbors :+ voisin_droite
+        list_of_neighbors = list_of_neighbors :+ voisin_bas
+        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
+        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
+      }
+      else if (i == grid.length-1) {
+        list_of_neighbors = list_of_neighbors :+ voisin_gauche
+        list_of_neighbors = list_of_neighbors :+ voisin_droite
+        list_of_neighbors = list_of_neighbors :+ voisin_haut
+        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
+        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
+
+      }
+      else if(j==grid(0).length-1){
+        list_of_neighbors = list_of_neighbors :+ voisin_haut
+        list_of_neighbors = list_of_neighbors :+ voisin_gauche
+        list_of_neighbors = list_of_neighbors :+ voisin_bas
+        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
+        list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
+      }
+    }
 
     else {
       //grid(i)(j)="8"
       list_of_neighbors = list_of_neighbors :+ voisin_haut
-          list_of_neighbors = list_of_neighbors :+ voisin_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_droite
-          list_of_neighbors = list_of_neighbors :+ voisin_bas
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
-          list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
+      list_of_neighbors = list_of_neighbors :+ voisin_gauche
+      list_of_neighbors = list_of_neighbors :+ voisin_droite
+      list_of_neighbors = list_of_neighbors :+ voisin_bas
+      list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_gauche
+      list_of_neighbors = list_of_neighbors :+ voisin_diagonal_haut_droite
+      list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_gauche
+      list_of_neighbors = list_of_neighbors :+ voisin_diagonal_bas_droite
 
     }
 
@@ -292,10 +292,10 @@ def init_game(grid:Array[Array[String]]):Array[Array[String]]={
 
   def incr_tab(neighbors: List[(Int,Int)],grid:Array[Array[String]]):Int={
     var nb_mine=0
-      for (ngb <- neighbors) {
-        if (grid(ngb._1)(ngb._2).equals("-1")) {
-          nb_mine += 1
-        }
+    for (ngb <- neighbors) {
+      if (grid(ngb._1)(ngb._2).equals("-1")) {
+        nb_mine += 1
+      }
     }
 
     nb_mine
