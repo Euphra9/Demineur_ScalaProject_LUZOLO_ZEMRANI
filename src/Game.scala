@@ -18,7 +18,7 @@ class Game {
     var gridWithMines = init_board_game()._2 // on recupere la grille de la solution finale
     reveledCell = (width * height) - nb_mine //on recupère le nombre de cellule que le joueur doit reveller pour gagner la partie
     val mineSweeper = new MineSweeper(reveledCell) // on cree un objet de type MineSweeper qui gère le plateau
-    mineSweeper.displayGrid(init_game(gridWithMines))
+    //mineSweeper.displayGrid(init_game(gridWithMines))
     gridWithMines=init_game(gridWithMines)//on initialise la grille de solution
     mineSweeper.displayGrid(grid) //on affiche le plateau
     grid = mineSweeper.interact(grid, gridWithMines, get_new_coords()) // on met à jour le plateau
