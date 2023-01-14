@@ -83,20 +83,20 @@ class Game {
   // (la ligne, la colonne)
   def get_new_coords():(Int,Int)={
     var coords = scala.io.StdIn.readLine(Functions().entry_message())
-
-    while (!Functions().is_format_correct(coords)) {
+    val fct=Functions()
+    while (!fct.is_format_correct(coords)) {
       coords = scala.io.StdIn.readLine(RED+"Veillez choisir un format correct ligne,colonne \nExemple : 1,2" +RESET+
         "\n"+Functions().entry_message)
     }
 
     var x= coords.split(",")
     //on verifie si le couple est une combinaison possible de la matrice
-    while (!Functions().is_inside(x(0).toInt,x(1).toInt,(height,width))) {
+    while (!fct.is_inside(x(0).toInt,x(1).toInt,(height,width))) {
       coords = scala.io.StdIn.readLine(RED+"Vueillez choisir des coordonnées valide\n"+RESET+Functions().entry_message)
       x= coords.split(",")
     }
     //on verifie si le couple est une combinaison deja joué
-    while (Functions().already_played(x(0).toInt, x(1).toInt,grid)) {
+    while (fct.already_played(x(0).toInt, x(1).toInt,grid)) {
       coords = scala.io.StdIn.readLine(RED+"Ces coordonnées ont deja été choisi, vueillez en choisir d'autre\n"+RESET+Functions().entry_message)
       x = coords.split(",")
     }
