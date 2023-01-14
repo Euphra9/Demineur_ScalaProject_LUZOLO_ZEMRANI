@@ -10,12 +10,14 @@ Réalisé par LUZOLO Euphraïm et ZEMRANI Malak
 #### Object Main
 #### Class Game
 #### Class Mine
-##### def get_nb_mine(Int) : Int
+##### Récuperer le nombre de mine à générer --> def get_nb_mine(Int) : Int
+Prend en paramètre le choix de la difficulté(facile-moyen-difficile)
+Renvoie le nombre de mine à generer en fonction de la difficulté
+***
 ##### def random_mine(Int,Int,Array[Array[String]]):Array[Array[String]]
 ##### def show_all_mine(Array[Array[String]],Array[Array[String]]):Array[Array[String]]
 ##### def get_neighbors((Int,Int),Array[Array[String]]):List[(Int,Int)]
-#####
-#####
+##### def incr_tab(List(Int,Int),Array[Array[String]]):Int
 #### Class MineSweeper
 #### Class Functions
 
