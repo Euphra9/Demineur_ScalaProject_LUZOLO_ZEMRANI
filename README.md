@@ -77,6 +77,17 @@ def is_fin_partie():Boolean
 * Renvoie l'état de la partie( si terminée ou pas)
 
 #### Class Functions
+#####
+def entry_message()
+##### Mettre en forme le plateau de jeu
+def mis_en_forme(x: Int,chaine:String,col:Boolean): String 
+##### Vérifier que la saisie utilisateur est correcte
+def is_format_correct(x: String): Boolean
+##### Vérifier que l'utilisateur ne saisit pas des coordonnées de la cellule dela decouverte
+def already_played(x: Int, y: Int,grid: Array[Array[String]]): Boolean
+##### Vérifier que les coordonnées saisit par l'utilisateur fassent partir de la matrice
+def is_inside(x: Int, y: Int, size:(Int,Int)): Boolean = {
+
 
 
 
