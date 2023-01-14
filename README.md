@@ -1,1 +1,2 @@
-# Demineur_ScalaProject_LUZOLO_ZEMRANI
+Programmation fonctionnelle (Scala) : Démineur
+Réalisé par : LUZOLO Euphraïm et ZEMRANI Malak
