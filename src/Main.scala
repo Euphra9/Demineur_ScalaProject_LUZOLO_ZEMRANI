@@ -16,12 +16,8 @@ object Main {
       case 3 => println("Niveau choisi : Difficile !")
     }
 
-    val new_game= new Game()
-    new_game.play(choice.toInt)
+    new Game().play(choice.toInt)
     println("--------------- FIN DE PARTIE ---------------")
-
-
-
 
 
   }

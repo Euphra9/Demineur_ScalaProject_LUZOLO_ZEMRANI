@@ -41,4 +41,36 @@ case class Mine() extends Game{
     }
     grid
   }
+
+  //Cette fonction permet de récupérer la liste des voisins
+  def get_neighbors(coords: (Int, Int), grid: Array[Array[String]]): List[(Int, Int)] = {
+
+    var list_of_neighbors: List[(Int, Int)] = List()
+    val x = coords._1
+    val y = coords._2
+    val rows = grid.length
+    val cols = grid(0).length
+    for (i <- x - 1 to x + 1;
+         j <- y - 1 to y + 1
+         if (i >= 0
+           && i < rows
+           && j >= 0
+           && j < cols
+           && !(i == x && j == y))) {
+      list_of_neighbors = list_of_neighbors :+ (i, j)
+
+    }
+    list_of_neighbors
+  }
+
+  //Cette fonction permet d'incrémenter la valeur des voisins aux coordonnées (i, j) si elle est différente de -1.
+  def incr_tab(neighbors: List[(Int, Int)], grid: Array[Array[String]]): Int = {
+    var nb_mine = 0
+    for (ngb <- neighbors) {
+      if (grid(ngb._1)(ngb._2).equals("-1")) {
+        nb_mine += 1
+      }
+    }
+    nb_mine
+  }
 }

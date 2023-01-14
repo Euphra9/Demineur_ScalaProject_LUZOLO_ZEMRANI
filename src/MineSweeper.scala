@@ -1,23 +1,28 @@
+import scala.Console._
 
 class MineSweeper(var reveledCell: Int) {
   var mine=Mine()
   var element=""
   var tmpList:List[(Int,Int)]=List() // utilisée pour stocker la liste des voisins d'une cellule
+  def this() {
+    this(0)
+  }
 
   //Cette fonction sert à afficher le plateau
   def displayGrid(grid: Array[Array[String]]): Unit = {
     print("   ")
     for (i <- 0 until grid(0).length) {
-      print(i + " ")
+      print(BLUE+i + " "+RESET)
     }
     println()
     for (y <- 0 until grid.length) {
       if (y.toString.length == 1) {
-        print(y + "  ")
+        print(BLUE+y + "  "+RESET)
       }
       else {
-        print(y + " ")
+        print(BLUE+y + " "+RESET)
       }
+
       for (x <- 0 until grid(0).length) {
         print(grid(y)(x) + " ")
       }
@@ -38,14 +43,9 @@ class MineSweeper(var reveledCell: Int) {
     }
     else {
       reveledCell-=1
-        if (couple._2.toString.length == 1) {
-          tmpGrid(couple._1)(couple._2)=Resultgrid(couple._1)(couple._2)
-        }
-        else {
-          tmpGrid(couple._1)(couple._2)=" "+Resultgrid(couple._1)(couple._2)
-        }
+        tmpGrid(couple._1)(couple._2)= Functions().mis_en_forme(couple._2,"",false)+Resultgrid(couple._1)(couple._2)
+
     }
-    println("Case restante à trouver : "+reveledCell)
     tmpGrid
   }
 
@@ -56,11 +56,8 @@ class MineSweeper(var reveledCell: Int) {
   def is_nextTo_mine(couple: (Int, Int),
                      grid: Array[Array[String]],
                      Resultgrid: Array[Array[String]]): Array[Array[String]] = {
-    val cell = new Neighbor()
-    val liste = cell.get_neighbors((couple._1, couple._2), Resultgrid)
+    val liste = Mine().get_neighbors((couple._1, couple._2), Resultgrid)
     var tmpGrid = grid
-
-
     if (Resultgrid(couple._1)(couple._2) == "0") {
       for (x <- liste) {
         if (!tmpList.contains(x)) {
@@ -68,15 +65,8 @@ class MineSweeper(var reveledCell: Int) {
           tmpGrid = is_nextTo_mine(x, tmpGrid, Resultgrid)
         }
       }
-
     }
-    if (couple._2.toString.length == 1) {
-      tmpGrid(couple._1)(couple._2) = Resultgrid(couple._1)(couple._2)
-    }
-    else {
-      tmpGrid(couple._1)(couple._2) = " " + Resultgrid(couple._1)(couple._2)
-    }
-    //tmpGrid(couple._1)(couple._2) = Resultgrid(couple._1)(couple._2)
+      tmpGrid(couple._1)(couple._2) = Functions().mis_en_forme(couple._2,"",true)+Resultgrid(couple._1)(couple._2)
     reveledCell -= 1
 
     tmpGrid
@@ -86,17 +76,19 @@ class MineSweeper(var reveledCell: Int) {
   //Cette fonction permet d'informer l'utilisateur de sa perte ou de son gain
   def is_fin_partie():Boolean={
     var result=false
+    //Si la cellule contient -1 alors l'utilisateur clique sur une bombre
+    // => l'utilisateur a perdu
     if(element=="-1"){
-      println("Vous avez perdu ! ")
+      println(RED+"Vous avez perdu !!! "+RESET)
       result=true
     }
+      // s(il ne reste que des bombes dans la matrice
+      // => Lutilisateur a gagné
     else if(reveledCell==0){
-      println("Vous avez gagné ! ")
+      println(GREEN+"Vous avez gagné ! "+RESET)
       result = true
     }
     result
   }
-
-
 
 }
