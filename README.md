@@ -1,8 +1,25 @@
 # Programmation fonctionnelle (Scala) : Démineur
 Réalisé par LUZOLO Euphraïm et ZEMRANI Malak
 ## Spécifications techniques
-#### Object Main
 #### Class Game
+##### Lancer une nouvelle partie. 
+def play(Int):Unit
+* Prend en paramètre le choix de la difficulté(facile-moyen-difficile)
+##### Récuperer les dimentions du plateau. 
+def get_dimension(Int):(Int,Int)
+* Prend en paramètre le choix de la difficulté(facile-moyen-difficile)
+* Renvoie les dimensions du plateau (longueyr,largeur) en fonction du choix
+##### Initialiser le plateau de jeu. 
+def init_board_game():(Array[Array[String]],Array[Array[String]])
+* Renvoie la matrice visible par l'utilisateur et la matrice contenant la solution(avec toutes les cellules initialisées à 0)
+#####
+def init_game(Array[Array[String]]):Array[Array[String]]
+* Prend en paramètre la matrice contenant la solution
+* Renvoie la matrice avec les nombres des voisons etant des mines dans chaque cellule
+##### Récupérer les coordonnées saisies par l'utilisateur. 
+def get_new_coords():(Int,Int)
+* Renvoie les coordonnées saisies
+
 #### Class Mine
 ##### Récuperer le nombre de mine à générer. 
 def get_nb_mine(Int) : Int
