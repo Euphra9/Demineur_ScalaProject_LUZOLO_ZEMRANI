@@ -5,7 +5,7 @@ Réalisé par LUZOLO Euphraïm et ZEMRANI Malak
 ##### Lancer une nouvelle partie. 
 def play(Int):Unit
 * Prend en paramètre le choix de la difficulté(facile-moyen-difficile)
-##### Récuperer les dimentions du plateau. 
+##### Récuprer les dimensions du plateau. 
 def get_dimension(Int):(Int,Int)
 * Prend en paramètre le choix de la difficulté(facile-moyen-difficile)
 * Renvoie les dimensions du plateau (longueyr,largeur) en fonction du choix
