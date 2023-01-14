@@ -38,7 +38,7 @@ def random_mine(Int,Int,Array[Array[String]]):Array[Array[String]]
 * Renvoie la matrice modifiée
 ***
 
-##### Afficher toutes les cellules contenant une mine
+##### Afficher toutes les cellules contenant une mine.
 def show_all_mine(Array[Array[String]],Array[Array[String]]):Array[Array[String]]
 * Prend en paramètre la matrice visible par l'utilisateur et la matrice contenant la solution
 * Renvoie la matrice visible par l'utilisateur avec toutes les mines placée
@@ -56,23 +56,23 @@ def incr_tab(List(Int,Int),Array[Array[String]]):Int
 * Renvoie le nombre de voisin qui contiennent des mines
 * 
 #### Class MineSweeper
-##### Afficher la matrice
+##### Afficher la matrice.
 def displayGrid(Array[Array[String]]):Unit
 * Prend en paramètre la matrice à afficher
 ***
-##### Mettre à jour la matrice en fonction de la saisie utilisateur
+##### Mettre à jour la matrice en fonction de la saisie utilisateur.
 def interact(Array[Array[String]],Array[Array[String]],(Int,Int)):Array[Array[String]]
 * Prend en paramètre la matrice visible par l'utilisateur et la matrice contenant la solution
 * Renvoie la matrice visible par l'utilisateur modifiée
 ***
 
-##### Ouvrir recusivement les cellules n'ayant aucun voisin qui est une mine
+##### Ouvrir recusivement les cellules n'ayant aucun voisin qui est une mine.
 def is_nextTo_mine((Int, Int),Array[Array[String]],Array[Array[String]]): Array[Array[String]]
 * Prend en paramètre un couple des coordonnées,la matrice visible par l'utilisateur et la matrice contenant la solution
 * Renvoie la matrice visible par l'utilisateur modifié
 ***
 
-##### Définir la fin de la partie
+##### Définir la fin de la partie.
 def is_fin_partie():Boolean
 * Renvoie l'état de la partie( si terminée ou pas)
 
@@ -100,7 +100,7 @@ def already_played(Int,Int,Array[Array[String]]): Boolean
 * Renvoie si oui ou non la cellule est déjà découverte
 ***
 
-##### Vérifier que les coordonnées saisit par l'utilisateur fassent partir de la matrice
+##### Vérifier que les coordonnées saisit par l'utilisateur fassent partir de la matrice.
 def is_inside(x: Int, y: Int, size:(Int,Int)): Boolean = {
 * Prend en paramètre les coordonnées saisies par l'utilisateur et la taille du plateau
 * Renvoie si oui ou non la saisie utilisateur est possible dans la matrice
