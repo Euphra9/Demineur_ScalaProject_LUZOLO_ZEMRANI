@@ -1,7 +1,7 @@
 import scala.Console._
 
 class MineSweeper(var reveledCell: Int) {
-  var mine=Mine()
+  var mine: Mine =Mine()
   var element=""
   var tmpList:List[(Int,Int)]=List() // utilisée pour stocker la liste des voisins d'une cellule
   def this() {
@@ -11,19 +11,14 @@ class MineSweeper(var reveledCell: Int) {
   //Cette fonction sert à afficher le plateau
   def displayGrid(grid: Array[Array[String]]): Unit = {
     print("   ")
-    for (i <- 0 until grid(0).length) {
+    for (i <- grid(0).indices) {
       print(BLUE+i + " "+RESET)
     }
     println()
-    for (y <- 0 until grid.length) {
-      if (y.toString.length == 1) {
-        print(BLUE+y + "  "+RESET)
-      }
-      else {
-        print(BLUE+y + " "+RESET)
-      }
+    for (y <- grid.indices) {
+      print(BLUE+y +Functions().mis_en_forme(y," ",col = false)+RESET)
 
-      for (x <- 0 until grid(0).length) {
+      for (x <- grid(0).indices) {
         print(grid(y)(x) + " ")
       }
       println()
@@ -43,7 +38,7 @@ class MineSweeper(var reveledCell: Int) {
     }
     else {
       reveledCell-=1
-        tmpGrid(couple._1)(couple._2)= Functions().mis_en_forme(couple._2,"",false)+Resultgrid(couple._1)(couple._2)
+        tmpGrid(couple._1)(couple._2)= Functions().mis_en_forme(couple._2,"",col = true)+Resultgrid(couple._1)(couple._2)
 
     }
     tmpGrid
@@ -66,7 +61,7 @@ class MineSweeper(var reveledCell: Int) {
         }
       }
     }
-      tmpGrid(couple._1)(couple._2) = Functions().mis_en_forme(couple._2,"",true)+Resultgrid(couple._1)(couple._2)
+      tmpGrid(couple._1)(couple._2) = Functions().mis_en_forme(couple._2,"",col = true)+Resultgrid(couple._1)(couple._2)
     reveledCell -= 1
 
     tmpGrid
@@ -79,13 +74,13 @@ class MineSweeper(var reveledCell: Int) {
     //Si la cellule contient -1 alors l'utilisateur clique sur une bombre
     // => l'utilisateur a perdu
     if(element=="-1"){
-      println(RED+"Vous avez perdu !!! "+RESET)
+      println(RED+"----- Vous avez perdu !!! -----"+RESET)
       result=true
     }
       // s(il ne reste que des bombes dans la matrice
       // => Lutilisateur a gagné
     else if(reveledCell==0){
-      println(GREEN+"Vous avez gagné ! "+RESET)
+      println(GREEN+"----- Vous avez gagné !!! ----- "+RESET)
       result = true
     }
     result

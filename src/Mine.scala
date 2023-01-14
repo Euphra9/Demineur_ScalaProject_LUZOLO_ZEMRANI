@@ -27,15 +27,10 @@ case class Mine() extends Game{
 
   //si l'utilisateur perd, on affiche toutes les mines cachées
   def show_all_mine(grid: Array[Array[String]], Resultgrid: Array[Array[String]]): Array[Array[String]] = {
-    for (i <- 0 until Resultgrid.length) {
-      for (j <- 0 until Resultgrid(0).length) {
+    for (i <- Resultgrid.indices) {
+      for (j <- Resultgrid(0).indices) {
         if (Resultgrid(i)(j) == "-1") {
-          if (j.toString.length == 1) {
-            grid(i)(j) = "*"
-          }
-          else {
-            grid(i)(j) = " *"
-          }
+          grid(i)(j)=Functions().mis_en_forme(j,"*",col = true)
         }
       }
     }

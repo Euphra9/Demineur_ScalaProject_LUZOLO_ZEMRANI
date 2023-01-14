@@ -51,7 +51,7 @@ class Game {
     //on fait une mise en forme agréable pour l'utilisateur
     for (i <- 0 until width) {
       for (j <- 0 until height) {
-        grid(j)(i) =Functions().mis_en_forme(i,".",true)
+        grid(j)(i) =Functions().mis_en_forme(i,".",col = true)
       }
     }
     //on genere une mine dans une case aléatoire
