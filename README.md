@@ -95,15 +95,15 @@ def is_format_correct(String): Boolean
 ***
 
 ##### Vérifier que l'utilisateur ne saisit pas des coordonnées de la cellule dela decouverte.
-def already_played(x: Int, y: Int,grid: Array[Array[String]]): Boolean
+def already_played(Int,Int,Array[Array[String]]): Boolean
 * Prend en paramètre les coordonnées saisies par l'utilisateur et la grille visible par l'utilisateur
 * Renvoie si oui ou non la cellule est déjà découverte
 ***
 
 ##### Vérifier que les coordonnées saisit par l'utilisateur fassent partir de la matrice
 def is_inside(x: Int, y: Int, size:(Int,Int)): Boolean = {
-* Prend en paramètre 
-* Renvoie 
+* Prend en paramètre les coordonnées saisies par l'utilisateur et la taille du plateau
+* Renvoie si oui ou non la saisie utilisateur est possible dans la matrice
 ***
 
 
